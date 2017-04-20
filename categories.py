@@ -19,12 +19,13 @@ categories = [
                       "What does"
                     ]
 
+#Tester list of questions, default input is a text file
 question_list = [
     
     "What is asthma?",
     "How can I tell if someone is having an asthma attack?",
     "What sort of medication will they use?",
-    "What does an inhaler look like?"
+    "What does an inhaler look like?",
     "What is a spacer?",
     "When should I call 911?",
     "What do I do if the person stops breathing?",
@@ -70,7 +71,8 @@ def categorize(question, categories):
             #If we're at the very end and it hasn't been found, kill function
             if counter == len(question) - 1:
 
-                print question , "***Category not found***"
+                print question , "***Quesiton form not found***"
+                print ""
 
                 return
 
@@ -78,11 +80,21 @@ def categorize(question, categories):
             counter = counter + 1
 
 
-    print "Question:" , question , "Tag:" , tag
+    print "Question:" , question , "Question form: \""+ categories[tag]+ "________?\""
+    print ""
 
 
-for q in question_list:
-    categorize(q, categories)
+#Read text file
+with open("q_list.txt", "r") as ins:
+    content = []
+    for line in ins:
+        content.append(line)
+        
+#Categorize each question in text file
+for line in content:
+    categorize(line, categories)
+
+    
 
 
 
