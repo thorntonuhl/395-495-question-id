@@ -1,27 +1,45 @@
-tag = -1
+import pickle
+
+# categories = [
+#                       "What if",
+#                       "Should I",
+#                       "What should I do if",
+#                       "How do I",
+#                       "What is",
+#                       "How can I tell if",
+#                       "Do I",
+#                       "What do I do if",
+#                       "Can I give them",
+#                       "What are the signs and symptoms of",
+#                       "How do I treat",
+#                       "When should I call 911?",
+#                       "Should I try",
+#                       "How long should I",
+#                       "How will I know if",
+#                       "What does"
+#                     ]
 
 categories = [
                       "What if",
                       "Should I",
-                      "What should I do if",
+                      "What should I do",
                       "How do I",
                       "What is",
-                      "How can I tell if",
+                      "How can I tell",
                       "Do I",
-                      "What do I do if",
-                      "Can I give them",
-                      "What are the signs and symptoms of",
-                      "How do I treat",
-                      "When should I call 911?",
+                      "What do I",
+                      "Can I",
+                      "What are",
+                      "When",
                       "Should I try",
                       "How long should I",
-                      "How will I know if",
+                      "How will I know",
                       "What does"
                     ]
 
 #Tester list of questions, default input is a text file
 question_list = [
-    
+
     "What is asthma?",
     "How can I tell if someone is having an asthma attack?",
     "What sort of medication will they use?",
@@ -32,19 +50,20 @@ question_list = [
     "What do I do if the bleeding soaks through the item I've used?",
     "What should I do if there is an embedded object in the wound?",
     "Should I wash the wound?",
-    
+
 ]
 
 #Categorize function
 def categorize(question, categories):
 
+
     tag = -1
-    
+
     counter = 0
 
     #While loop for n question substrings
     while counter < len(question):
-        
+
         #If substring in category question list
         if question[0:counter] in categories:
 
@@ -71,17 +90,16 @@ def categorize(question, categories):
             #If we're at the very end and it hasn't been found, kill function
             if counter == len(question) - 1:
 
-                print question , "***Quesiton form not found***"
-                print ""
+                print question , "***Question form not found***\n"
 
-                return
+                return question, "Uncategorized"
 
             #Otherwise just hit next substring
             counter = counter + 1
 
 
-    print "Question:" , question , "Question form: \""+ categories[tag]+ "________?\""
-    print ""
+    print "Question:" , question , "Question form: \""+ categories[tag]+ "________?\"\n"
+    return question, categories[tag]
 
 
 #Read text file
@@ -89,15 +107,20 @@ with open("q_list.txt", "r") as ins:
     content = []
     for line in ins:
         content.append(line)
-        
+
+# FOR LATER: abstract this data structure to a nested dictionary
+categorized_questions = {}
+categorized_questions["Uncategorized"] = []
+for c in categories:
+    categorized_questions[c] = []
+
+
 #Categorize each question in text file
-for line in content:
-    categorize(line, categories)
-
-    
-
-
-
-    
+with open("categories.txt", "w") as out:
+    for line in content:
+        q,k = categorize(line, categories)
+        categorized_questions[k].append(q)
 
 
+pickle.dump(categorized_questions, open("categorized_questions.pkl", "wb"))
+print categorized_questions
