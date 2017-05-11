@@ -18,6 +18,7 @@ import re
 # print  nltk.pos_tag(text)
 
 # perform search on a categorized database... as opposed to general DB
+# need to handle 'someone'
 stop_words = set(stopwords.words('english'))
 def format_db(file):
     db = []
@@ -38,6 +39,8 @@ def find_match(question):
             if word not in stop_words: # to use or not to use stopwords???
                 keywords.append(word)
 
+    if 'someone' in keywords:
+        keywords.remove('someone')
     # print outputs
     print "TAGGED SENTENCE: {}".format(tagged_q)
     print "KEYWORDS: {}".format(keywords)
@@ -60,17 +63,19 @@ def find_match(question):
         for i in range(0,keyword_len-1):
             bigram = "{0} {1}".format(keywords[i],keywords[i+1])
             more_matches += list(set(re.findall("[^\n]*{0}[^?]*\\?".format(bigram), matches)))
-        print more_matches
+        if len(more_matches) == 0:
+            return matches.split("\n")
+        else:
+            return more_matches
         # if no matches, just search for BOTH keywords in each line...
     else:
-        print matches.split("\n")
-    return 0
+        return matches.split("\n")
 
 # db = format_db('q_list.txt')
 def main():
     question = raw_input("enter question: ")
     find_match(question)
-main()
 
+print main()
 
 # print format_db('q_list.txt')
