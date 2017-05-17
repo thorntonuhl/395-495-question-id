@@ -38,7 +38,7 @@ def get_category(question, categories = [
             #If we're at the very end and it hasn't been found, kill function
             if counter == len(question) - 1:
                 print question , "***Question form not found***\n"
-                return question, "Uncategorized"
+                return "Uncategorized"
 
             #Otherwise just hit next substring
             counter = counter + 1
