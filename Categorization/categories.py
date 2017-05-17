@@ -1,55 +1,20 @@
-import pickle
-
-# categories = [
-#                       "What if",
-#                       "Should I",
-#                       "What should I do if",
-#                       "How do I",
-#                       "What is",
-#                       "How can I tell if",
-#                       "Do I",
-#                       "What do I do if",
-#                       "Can I give them",
-#                       "What are the signs and symptoms of",
-#                       "How do I treat",
-#                       "When should I call 911?",
-#                       "Should I try",
-#                       "How long should I",
-#                       "How will I know if",
-#                       "What does"
-#                     ]
-
-# categories = [
-#                       "What if",
-#                       "Should",
-#                     #   "What should I do if",
-#                       "How do",
-#                       "What is",
-#                       "How can",
-#                       "Do",
-#                       "What do",
-#                       "Can",
-#                       "What are",
-#                       "When",
-#                       "How",
-#                       "What does"
-#                     ]
+tag = -1
 
 # pre-process for contractions and singular/plural
 categories = [
-            "Who",
-            "What if",
-            "What is",
-            "What are"
-            "What do",
-            "What are",
-            "What does",
-            "When",
-            "Where",
-            "How",
-            "Should",
-            "Can",
-            # no why
+    "Who",
+    "What if",
+    "What is",
+    "What are"
+    "What do",
+    "What are",
+    "What does",
+    "When",
+    "Where",
+    "How",
+    "Should",
+    "Can",
+    # don't include 'why'
 ]
 
 #Tester list of questions, default input is a text file
@@ -70,7 +35,6 @@ question_list = [
 
 #Categorize function
 def categorize(question, categories):
-
 
     tag = -1
 
@@ -105,16 +69,17 @@ def categorize(question, categories):
             #If we're at the very end and it hasn't been found, kill function
             if counter == len(question) - 1:
 
-                print question , "***Question form not found***\n"
+                print question , "***Question form not found***"
+                print ""
 
-                return question, "Uncategorized"
+                return
 
             #Otherwise just hit next substring
             counter = counter + 1
 
 
-    print "Question:" , question , "Question form: \""+ categories[tag]+ "________?\"\n"
-    return question, categories[tag]
+    print "Question:" , question , "Question form: \""+ categories[tag]+ "________?\""
+    print ""
 
 
 #Read text file
@@ -123,19 +88,6 @@ with open("q_list.txt", "r") as ins:
     for line in ins:
         content.append(line)
 
-# FOR LATER: abstract this data structure to a nested dictionary
-categorized_questions = {}
-categorized_questions["Uncategorized"] = []
-for c in categories:
-    categorized_questions[c] = []
-
-
 #Categorize each question in text file
-with open("categories.txt", "w") as out:
-    for line in content:
-        q,k = categorize(line, categories)
-        categorized_questions[k].append(q)
-
-
-pickle.dump(categorized_questions, open("categorized_questions.pkl", "wb"))
-print categorized_questions
+for line in content:
+    categorize(line, categories)
