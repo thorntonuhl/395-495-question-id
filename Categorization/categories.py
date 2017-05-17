@@ -19,23 +19,38 @@ import pickle
 #                       "What does"
 #                     ]
 
+# categories = [
+#                       "What if",
+#                       "Should",
+#                     #   "What should I do if",
+#                       "How do",
+#                       "What is",
+#                       "How can",
+#                       "Do",
+#                       "What do",
+#                       "Can",
+#                       "What are",
+#                       "When",
+#                       "How",
+#                       "What does"
+#                     ]
+
+# pre-process for contractions and singular/plural
 categories = [
-                      "What if",
-                      "Should I",
-                      "What should I do",
-                      "How do I",
-                      "What is",
-                      "How can I tell",
-                      "Do I",
-                      "What do I",
-                      "Can I",
-                      "What are",
-                      "When",
-                      "Should I try",
-                      "How long should I",
-                      "How will I know",
-                      "What does"
-                    ]
+            "Who",
+            "What if",
+            "What is",
+            "What are"
+            "What do",
+            "What are",
+            "What does",
+            "When",
+            "Where",
+            "How",
+            "Should",
+            "Can",
+            # no why
+]
 
 #Tester list of questions, default input is a text file
 question_list = [
