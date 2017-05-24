@@ -150,9 +150,8 @@ def auto_category(question):
 
      
 
-            
-print auto_category("What sort of medication will they use?")
-print auto_category("If a bone looks unnatural or dislocated, should I put it back in its place?")
+#print auto_category("What sort of medication will they use?")
+#print auto_category("If a bone looks unnatural or dislocated, should I put it back in its place?")
                                    
 '''
 #Read text file

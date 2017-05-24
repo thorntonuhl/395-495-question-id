@@ -45,7 +45,7 @@ def get_category(question, categories = [
     # print "Question:" , question , "Question form: \""+ categories[tag]+ "________?\"\n"
     return categories[tag]
 
-def a(question):
+def get_keywords(question):
     stop_words = set(stopwords.words('english'))
 
     text = nltk.word_tokenize(question)
@@ -60,6 +60,12 @@ def a(question):
     # print "KEYWORDS: {}".format(keywords)
     return keywords
 
+def get_phrase_after_category(question, category):
+    try:
+        return question.split(category, 1)[1]
+    except:
+        return question
+
 
 #while True:
 #    question = raw_input(">> ")
@@ -67,4 +73,3 @@ def a(question):
 #    k = get_keywords(question)
 #    print "CATEGORY: ", c
 #    print "KEYWORDS: ", k
-print a("How do I peel a banana?")
