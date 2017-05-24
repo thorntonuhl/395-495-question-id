@@ -25,14 +25,14 @@ def Answer(question, category, keywords, main_phrase, curr_step):
 		if category in question:
 			has_image = True
 			answer["type"] = "image"
-			answer["mediaLink"] = (SearchImage(question))
+			answer["mediaLink"] = (SearchImage(main_phrase))
 
 	if not has_image:
 		for category in VIDEO_CATEGORIES:
 			if category in question:
 				has_video = True
 				answer["type"] = "video"
-				answer["mediaLink"] = (SearchYouTube(question))
+				answer["mediaLink"] = (SearchYouTube(main_phrase))
 
 
 	if not has_image and not has_video:
@@ -41,28 +41,6 @@ def Answer(question, category, keywords, main_phrase, curr_step):
 
 	answer["text"] = answer_text
 	return json.dumps(answer, ensure_ascii=False)
-
-
-
-
-#with open('../fattypayload.json') as data_file:    
-#    data = json.load(data_file)
-#Answer()
-
-
-
-#NOTES
-#We are given (Catagories, keywords w/Part of speech)
-
-#Test Cases:
-#1) What is bone tissue
-# 	["What is", [(bone, JJ), (tissue, NN)]
-
-
-
-
-
-#def getStory(category, keywords):
 
 
 
