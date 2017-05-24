@@ -6,9 +6,13 @@ from pprint import pprint
 
 
 VIDEO_CATEGORIES = ["What if", "Should I", "What should I do if", "How do I", "How can I tell if", "Do I", "What do I do if", "Can I give them",
-"How do I treat", "When should I call 911?", "Should I try", "How long should I", "How will I know if", "What does"]
+"How do I treat", "When should I call 911?", "Should I try", "How long should I", "How will I know if", "What does", "What do", "When", "How", "Should", "Can"
+"what if", "should I", "what should I do if", "how do I", "how can I tell if", "ho I", "what do I do if", "can I give them",
+"how do I treat", "when should I call 911?", "should I try", "how long should I", "how will I know if", "what does", "what do", "when", "how", "should", "can"]
 
-IMAGE_CATEGORIES = ["What is", "What are the signs and symptoms of"]
+IMAGE_CATEGORIES = ["What is", "What are the signs and symptoms of", "Who", "What are", "What does", "Where","what is", 
+"what are the signs and symptoms of", "who", "what are", "what does", "where"]
+
 
 def Answer(question, category, keywords, main_phrase, curr_step):
 	answer = {}
