@@ -10,7 +10,7 @@ VIDEO_CATEGORIES = ["What if", "Should I", "What should I do if", "How do I", "H
 
 IMAGE_CATEGORIES = ["What is", "What are the signs and symptoms of"]
 
-def Answer(question, category, keywords, main_phrase):
+def Answer(question, category, keywords, main_phrase, curr_step):
 	answer = {}
 	#First gather text
 	answer_text = "Here's what you should do"
@@ -40,7 +40,7 @@ def Answer(question, category, keywords, main_phrase):
 		answer["mediaLink"] = "none"
 
 	answer["text"] = answer_text
-	return answer
+	return json.dumps(answer, ensure_ascii=False)
 
 
 
