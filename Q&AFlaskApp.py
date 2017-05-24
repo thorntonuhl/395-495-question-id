@@ -1,5 +1,5 @@
 import json
-from flask import Flask
+from flask import Flask, request
 from AnswerID.Answering import Answer
 from Categorization.auto_add_categories import auto_category
 from Categorization.parser import get_keywords
@@ -11,14 +11,9 @@ app = Flask(__name__)
 
 
 
-@app.route("/")
+@app.route("/", methods=['POST'])
 def hello():
-
-	SRC = "fattypayload.json"
-
-	#load the parser's payload
-	with open(SRC) as data_file:    
-	    data = json.load(data_file)
+	data = json.loads(request.get_json())
 
 	#extract question and title of current step from payload
 	question = data["userText"]
