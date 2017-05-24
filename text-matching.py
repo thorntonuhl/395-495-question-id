@@ -29,7 +29,7 @@ def format_db(file):
 
 
 def find_match(question):
-    text = nltk.word_tokenize(question)
+    text = nltk.word_tokenize(question.lower())
     tagged_q = nltk.pos_tag(text)
     keywords = []
     # extract keywords
@@ -45,37 +45,65 @@ def find_match(question):
     print "TAGGED SENTENCE: {}".format(tagged_q)
     print "KEYWORDS: {}".format(keywords)
     # find matches in DB
+    matches = []
     with open('q_list.txt') as text:
         string = text.read()
         text.close()
-        matches = []
         for kw in keywords:
             # matches += '\n'.join(re.findall("[^\n]*{0}[^?]*\\?".format(kw), string))
             matches += re.findall("[^\n]*{0}[^?]*\\?".format(kw), string)
 
     matches = "\n".join(matches)
     # print "MATCHES: {}".format(matches)
-
     # # PHASE 2
     keyword_len = len(keywords)
-    more_matches = []
+    ret = ''
     if keyword_len > 1:
+        more_matches = []
+
         for i in range(0,keyword_len-1):
             bigram = "{0} {1}".format(keywords[i],keywords[i+1])
             more_matches += list(set(re.findall("[^\n]*{0}[^?]*\\?".format(bigram), matches)))
         if len(more_matches) == 0:
-            return matches.split("\n")
+            ret = matches.split("\n")
         else:
-            return more_matches
+            ret = more_matches
         # if no matches, just search for BOTH keywords in each line...
+        # iterate thru synonymns for matches on words that yield no returns (typically verbs... identify, tell the difference, etc)
     else:
-        return matches.split("\n")
+        ret = matches.split("\n")
+    ret = [q.lower() for q in ret]
 
-# db = format_db('q_list.txt')
+    if len(ret) == 1:
+        print "QUESTION FOUND:"
+        return ret[0]
+    if question.lower() in ret:
+        print "QUESTION FOUND:"
+        print ret
+        return question.lower()
+    else:
+        return ret
+
+# def iterOptions(keywords, qlist):
+#     """
+#     input: list of potential question matches
+#     return: last match
+#     """
+#     length = len(qlist)
+#     if length == 1:
+#         return qlist[0]
+#     elif length == 0:
+#         return "ERROR"
+#     for kw in keywords:
+#         for q in qlist:
+#             if
+
 def main():
     question = raw_input("enter question: ")
-    find_match(question)
+    return find_match(question)
 
 print main()
 
-# print format_db('q_list.txt')
+# use my pos tagger/ keyword extracter, compare keywords to remaining options in DB, use lemma or stem matcher
+# from 'sentence-matcher.py' to generate jaccard similarity
+    # need modifications to take in a mere LIST of keywords for 1 input, rather than a sentence
