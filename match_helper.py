@@ -37,16 +37,29 @@ def match_lemmas(a, b, threshold=0.5):
     lemmae_b = [lemmatizer.lemmatize(token.lower().strip(string.punctuation), pos) for token, pos in pos_b \
                     if pos == wordnet.NOUN and token.lower().strip(string.punctuation) not in stopwords]
 
-    # Calculate Jaccard similarity
-    print pos_a, pos_b
+    # print pos_a, pos_b
     print lemmae_a, lemmae_b
 
+    # Calculate Jaccard similarity
     ratio = len(set(lemmae_a).intersection(lemmae_b)) / float(len(set(lemmae_a).union(lemmae_b)))
     print ratio
     return (ratio >= threshold)
 
+def get_lemmas_ratio(a, b):
+    """Check if a and b are matches."""
+    pos_a = map(get_wordnet_pos, nltk.pos_tag(wordpunct_tokenize(a)))
+    pos_b = map(get_wordnet_pos, nltk.pos_tag(wordpunct_tokenize(b)))
+    lemmae_a = [lemmatizer.lemmatize(token.lower().strip(string.punctuation), pos) for token, pos in pos_a \
+                    if pos == wordnet.NOUN and token.lower().strip(string.punctuation) not in stopwords]
+    lemmae_b = [lemmatizer.lemmatize(token.lower().strip(string.punctuation), pos) for token, pos in pos_b \
+                    if pos == wordnet.NOUN and token.lower().strip(string.punctuation) not in stopwords]
 
+    # print pos_a, pos_b
+    # print lemmae_a, lemmae_b
 
+    # Calculate Jaccard similarity
+    ratio = len(set(lemmae_a).intersection(lemmae_b)) / float(len(set(lemmae_a).union(lemmae_b)))
+    return ratio
 
 stemmer = nltk.stem.snowball.SnowballStemmer('english')
 
@@ -59,14 +72,18 @@ def match_stems(a, b, threshold=0.5):
     stems_a = [stemmer.stem(token) for token in tokens_a]
     stems_b = [stemmer.stem(token) for token in tokens_b]
 
-    print stems_a, stems_b
+    # print stems_a, stems_b
     # Calculate Jaccard similarity
     ratio = len(set(stems_a).intersection(stems_b)) / float(len(set(stems_a).union(stems_b)))
     print ratio
     return (ratio >= threshold)
 
-# a = "asthma symptoms?"
-# b = "What is asthma?"
-# c = "Very long ago in the eighteenth century, many scholars regarded man as merely a clockwork automaton."
-# d = "In the eighteenth century it was often convenient to regard man as a clockwork automaton."
-# print match_stems(a, b)
+a = "asthma symptoms?"
+b = "What is asthma?"
+c = "Very long ago in the eighteenth century, many scholars regarded man as merely a clockwork automaton."
+d = "In the eighteenth century it was often convenient to regard man as a clockwork automaton."
+e = "how do i treat meningitis?"
+d = "what is meningitis?"
+#
+# print match_stems(e,d)
+# print match_lemmas(b,d)
