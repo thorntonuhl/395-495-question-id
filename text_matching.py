@@ -91,7 +91,8 @@ def find_match(question, keywords, matches):
             # using simple ratio calculator
             if get_ratio(keywords, get_keywords(q)):
                 stem_matches.append(q)
-        # print "Matches: {0}".format(stem_matches)
+        print "Matches: {0}".format(stem_matches)
+        # ISSUES: kind of need stemming... (e.g. 'how do i treat a nosebleed', vs 'how do i... nosebleedS')
         if len(stem_matches) == 1:
             response = stem_matches[0]
         else:
@@ -102,6 +103,8 @@ def find_match(question, keywords, matches):
                     best = q
             response = best
     print "Identified question:"
+    if response < 0:
+        return "No match found"
     return response
 
 def get_ratio(lst1, lst2, threshold=0.5):
