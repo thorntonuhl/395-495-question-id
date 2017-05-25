@@ -15,7 +15,7 @@ app = Flask(__name__)
 def hello():
 	if request.method == 'GET':
 		return 'hello there'
-	data = json.loads(request.get_json())
+	data = json.load(request.get_json())
 	print "yo"
 
 	#extract question and title of current step from payload
