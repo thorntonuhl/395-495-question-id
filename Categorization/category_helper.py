@@ -141,6 +141,12 @@ def auto_category(question):
 
             question_form = question[(char_counter+2):len(question)]
 
+            new_len = len(question_form)
+
+            question_form = question_form[0:1].upper() + question_form[1:new_len]
+
+            question_form = categorize(question_form)
+
             return question_form
 
         #Continue iteration if nothing matches
