@@ -141,7 +141,17 @@ def auto_category(question):
 
             question_form = question[(char_counter+2):len(question)]
 
-            return question_form
+            new_len = len(question_form)
+            
+            #Change the question into what happens after the comma
+            question_form = question_form[0:1].upper() + question_form[1:new_len]
+            #With the first letter uppercase
+
+            #Re-categorize 
+            final_cat = categorize(question_form)
+
+            #Return clipped string with through second iteration
+            return final_cat
 
         #Continue iteration if nothing matches
         char_counter = char_counter + 1
