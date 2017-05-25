@@ -4,11 +4,21 @@ from AnswerID.Answering import Answer
 from Categorization.auto_add_categories import auto_category
 from Categorization.parser import get_keywords
 from Categorization.parser import get_phrase_after_category
+from flask_cors import CORS, cross_origin
 
 
 
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
+
+@app.route('/foo', methods=['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def foo():
+    return request.json['inputVar']
 
 
 @app.route("/", methods=['POST', 'GET'])
