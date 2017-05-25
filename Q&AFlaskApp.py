@@ -11,9 +11,12 @@ app = Flask(__name__)
 
 
 
-@app.route("/", methods=['POST'])
+@app.route("/", methods=['POST', 'GET'])
 def hello():
+	if request.method == 'GET':
+		return 'hello there'
 	data = json.loads(request.get_json())
+	print "yo"
 
 	#extract question and title of current step from payload
 	question = data["userText"]
@@ -32,4 +35,4 @@ def hello():
 	return answer
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port = 5000)
