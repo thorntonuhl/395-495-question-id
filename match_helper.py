@@ -42,7 +42,7 @@ def match_lemmas(a, b, threshold=0.5):
 
     # Calculate Jaccard similarity
     ratio = len(set(lemmae_a).intersection(lemmae_b)) / float(len(set(lemmae_a).union(lemmae_b)))
-    print ratio
+    # print ratio
     return (ratio >= threshold)
 
 def get_lemmas_ratio(a, b):
@@ -53,12 +53,12 @@ def get_lemmas_ratio(a, b):
                     if pos == wordnet.NOUN and token.lower().strip(string.punctuation) not in stopwords]
     lemmae_b = [lemmatizer.lemmatize(token.lower().strip(string.punctuation), pos) for token, pos in pos_b \
                     if pos == wordnet.NOUN and token.lower().strip(string.punctuation) not in stopwords]
-
     # print pos_a, pos_b
     # print lemmae_a, lemmae_b
 
     # Calculate Jaccard similarity
     ratio = len(set(lemmae_a).intersection(lemmae_b)) / float(len(set(lemmae_a).union(lemmae_b)))
+    # print ratio
     return ratio
 
 stemmer = nltk.stem.snowball.SnowballStemmer('english')
