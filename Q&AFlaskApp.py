@@ -9,6 +9,7 @@ from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__)
+CORS(app)
 
 # app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
 # app.config['CORS_HEADERS'] = 'Content-Type'
@@ -25,7 +26,7 @@ app = Flask(__name__)
 def hello():
 	if request.method == 'GET':
 		return 'hello there'
-	data = json.load(request.get_json())
+	data = request.get_json()
 	print data
 
 	#extract question and title of current step from payload
