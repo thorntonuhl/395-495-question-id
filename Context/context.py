@@ -40,7 +40,7 @@ def substitute(question, context):
     return q
 
 
-
+print substitute(raw_input("Question: "),raw_input("Context: "))
 # Test
 # questionlist = ['What is that?', ]
 # instructionlist = ['Cut off your leg.']
