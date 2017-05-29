@@ -34,7 +34,7 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 	#Next we will check for keywords in our scraped content if not found in wiki-how.csv
 	if text_match_attempt == -1 or question == "":
 		for key in CONTENT:#sentence[0] is keywords, sentence[1] is actual sentence
-			if len(frozenset(keywords).intersection(key)) == len(frozenset(keywords)) and len(keywords) > 0 and abs(len(frozenset(keywords))- len(key)) < 2:
+			if len(frozenset(keywords).intersection(key)) == len(frozenset(keywords)) and len(keywords) > 0 and abs(len(frozenset(keywords))- len(key)) < 3:
 				print  str(frozenset(keywords).intersection(key)) + " buffer " +  str(frozenset(keywords)), key
 				answer_text = CONTENT[key]
 	has_image = False
