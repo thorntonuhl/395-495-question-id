@@ -7,7 +7,7 @@ def substitute(question, context):
     q = question.lower().translate(None, string.punctuation).split(' ')
     deictic = (set(singular_deictic).union(set(plural_deictic))).intersection(set(q))
     if not deictic:
-        return question
+        return [question. "?"]
 
     tagged_context = nltk.pos_tag(nltk.word_tokenize(context))
     replacements = []
@@ -37,10 +37,4 @@ def substitute(question, context):
         q[q.index(d)] = replacements[r]
         r += 1
 
-    return q
-
-
-print substitute(raw_input("Question: "),raw_input("Context: "))
-# Test
-# questionlist = ['What is that?', ]
-# instructionlist = ['Cut off your leg.']
+    return " ".join(str(x) for x in q) + "?"

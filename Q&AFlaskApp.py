@@ -1,4 +1,4 @@
-import json
+import json, pickle
 from flask import Flask, request
 from AnswerID.Answering import Answer
 from Categorization.auto_add_categories import auto_category
