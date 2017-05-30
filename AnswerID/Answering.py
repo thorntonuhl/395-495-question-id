@@ -31,7 +31,6 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 	if text_match_attempt != -1:
 		answer_text = text_match_attempt
 	#Next we will check for keywords in our scraped content if not found in wiki-how.csv
-	text_match_attempt = -1
 	if text_match_attempt == -1 or question == "":
 		for key in CONTENT:
 			if len(frozenset(keywords).intersection(key)) > 2 and len(keywords) > 0:
