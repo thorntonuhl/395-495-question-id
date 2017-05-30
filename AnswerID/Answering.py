@@ -6,8 +6,7 @@ from text_matching import text_match_csv
 from context import substitute
 
 
-VIDEO_CATEGORIES = ["who",
-    "what if",
+VIDEO_CATEGORIES = ["what if",
     "what do",
     "what are",
     "what does",
@@ -16,7 +15,7 @@ VIDEO_CATEGORIES = ["who",
     "should",
     "can"]
 
-IMAGE_CATEGORIES = ["what is", "what are", "where", "whats", "what's"]
+IMAGE_CATEGORIES = ["what is", "what are", "where", "whats", "what's", "who"]
 
 
 
@@ -32,9 +31,10 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 	if text_match_attempt != -1:
 		answer_text = text_match_attempt
 	#Next we will check for keywords in our scraped content if not found in wiki-how.csv
+	text_match_attempt = -1
 	if text_match_attempt == -1 or question == "":
-		for key in CONTENT:#sentence[0] is keywords, sentence[1] is actual sentence
-			if len(frozenset(keywords).intersection(key)) == len(frozenset(keywords)) and len(keywords) > 0 and abs(len(frozenset(keywords))- len(key)) < 3:
+		for key in CONTENT:
+			if len(frozenset(keywords).intersection(key)) > 2 and len(keywords) > 0:
 				print  str(frozenset(keywords).intersection(key)) + " buffer " +  str(frozenset(keywords)), key
 				answer_text = CONTENT[key]
 	has_image = False
@@ -53,8 +53,8 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 
 
 	if not has_image and not has_video:
-		answer["type"] = "none"
-		answer["mediaLink"] = "none"
+		answer["type"] = "image"
+		answer["mediaLink"] = (SearchImage(' '.join(keywords)))
 
 	if answer_text == "":
 		answer_text = "Sorry, does this help?"

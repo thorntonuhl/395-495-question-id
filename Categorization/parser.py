@@ -73,5 +73,3 @@ def get_phrase_after_category(question, category):
 #    k = get_keywords(question)
 #    print "CATEGORY: ", c
 #    print "KEYWORDS: ", k
-print set(get_keywords("What is a femur")).intersection([('femur', 'NN')])
-print get_keywords("How do I stop bleeding from my leg?")
