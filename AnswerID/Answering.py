@@ -34,7 +34,7 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 	if text_match_attempt == -1 or question == "":
 		for key in CONTENT:
 			if len(frozenset(keywords).intersection(key)) > 2 and len(keywords) > 0:
-				print  str(frozenset(keywords).intersection(key)) + " buffer " +  str(frozenset(keywords)), key
+				#print  str(frozenset(keywords).intersection(key)) + " buffer " +  str(frozenset(keywords)), key
 				answer_text = CONTENT[key]
 	has_image = False
 	has_video = False
