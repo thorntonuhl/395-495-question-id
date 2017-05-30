@@ -1,51 +1,62 @@
 from VideoSearch import SearchYouTube
 from ImageSearch import SearchImage
-import webbrowser, json
+import webbrowser, json, pickle
 from pprint import pprint
+from text_matching import text_match_csv
+from context import substitute
+
+
+VIDEO_CATEGORIES = ["what if",
+    "what do",
+    "what are",
+    "what does",
+    "when",
+    "how",
+    "should",
+    "can"]
+
+IMAGE_CATEGORIES = ["what is", "what are", "where", "whats", "what's", "who"]
 
 
 
-VIDEO_CATEGORIES = ["What if", "Should I", "What should I do if", "How do I", "How can I tell if", "Do I", "What do I do if", "Can I give them",
-"How do I treat", "When should I call 911?", "Should I try", "How long should I", "How will I know if", "What does", "What do", "When", "How", "Should", "Can"
-"what if", "should I", "what should I do if", "how do I", "how can I tell if", "ho I", "what do I do if", "can I give them",
-"how do I treat", "when should I call 911?", "should I try", "how long should I", "how will I know if", "what does", "what do", "when", "how", "should", "can"]
-
-IMAGE_CATEGORIES = ["What is", "What are the signs and symptoms of", "Who", "What are", "What does", "Where","what is", 
-"what are the signs and symptoms of", "who", "what are", "what does", "where"]
-
-
-def Answer(question, category, keywords, main_phrase, curr_step):
+def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 	answer = {}
-	#First gather text
-	answer_text = "Here's what you should do"
+	#Gather text
+	answer_text = ""
 
-
-
-
+	#First, contextualize the question if needed
+	question = ' '.join(substitute(question, curr_step))
+	#Now we check wiki-how csv to see if it exists already in the file
+	text_match_attempt = text_match_csv(file, question)
+	if text_match_attempt != -1:
+		answer_text = text_match_attempt
+	#Next we will check for keywords in our scraped content if not found in wiki-how.csv
+	if text_match_attempt == -1 or question == "":
+		for key in CONTENT:
+			if len(frozenset(keywords).intersection(key)) > 2 and len(keywords) > 0:
+				#print  str(frozenset(keywords).intersection(key)) + " buffer " +  str(frozenset(keywords)), key
+				answer_text = CONTENT[key]
 	has_image = False
 	has_video = False
 	#Next, return video or image if applicable
-	for category in IMAGE_CATEGORIES:
-		if category in question:
-			has_image = True
-			answer["type"] = "image"
-			answer["mediaLink"] = (SearchImage(main_phrase))
+	if category in IMAGE_CATEGORIES or len(question.split()) == 1:
+		has_image = True
+		answer["type"] = "image"
+		answer["mediaLink"] = (SearchImage(main_phrase))
 
 	if not has_image:
-		for category in VIDEO_CATEGORIES:
-			if category in question:
-				has_video = True
-				answer["type"] = "video"
-				answer["mediaLink"] = (SearchYouTube(main_phrase))
+		if category in VIDEO_CATEGORIES:
+			has_video = True
+			answer["type"] = "video"
+			answer["mediaLink"] = (SearchYouTube(main_phrase))
 
 
 	if not has_image and not has_video:
-		answer["type"] = "none"
-		answer["mediaLink"] = "none"
+		answer["type"] = "image"
+		answer["mediaLink"] = (SearchImage(' '.join(keywords)))
 
+	if answer_text == "":
+		answer_text = "Sorry, does this help?"
+		
 	answer["text"] = answer_text
 	return json.dumps(answer, ensure_ascii=False)
-
-
-
-
