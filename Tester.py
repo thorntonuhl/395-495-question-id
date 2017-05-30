@@ -42,7 +42,7 @@ def test(question, curr_step, file):
 print test("Why isn't the child's throat checked for objects before compression is started?", "jib jab", "Data/wikihow.csv")
 print test("How do I help a person who is choking in his sleep?", "jib jab", "Data/wikihow.csv")
 
-#Testing for wikihow functionality still
+#Testing for overall functionality
 print test("How do I give CPR?", "jib jab", "Data/wikihow.csv")
 print test("Regarding my child, who should I be asking to know how to effectively treat them", "child caring","Data/wikihow.csv" )
 

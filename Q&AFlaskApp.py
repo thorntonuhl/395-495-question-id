@@ -62,7 +62,7 @@ def hello():
 	keywords = frozenset(keywords)  
 	main_phrase = get_phrase_after_category(question, category).lstrip()
 	#Answer question
-	answer = Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT)
+	answer = Answer(question, category, keywords, main_phrase, curr_step, "Data/wikihow.csv", CONTENT)
 
 	#return Answer as a dictionary
 	return answer
