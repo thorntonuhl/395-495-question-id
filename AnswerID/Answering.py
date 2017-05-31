@@ -25,6 +25,9 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 	answer_text = ""
 
 	#First, contextualize the question if needed
+	if type(question) is list:
+		question = " ".join(question)
+		
 	question = ' '.join(substitute(question, curr_step))
 	#Now we check wiki-how csv to see if it exists already in the file
 	text_match_attempt = text_match_csv(file, question)
