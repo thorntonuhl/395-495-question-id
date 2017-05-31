@@ -2,8 +2,9 @@ import nltk, string
 
 def substitute(question, context):
     # deictic = ["it", "that", "there", "those", "this", "these"]
-    singular_deictic = ["it", "that", "there", "this"]
-    plural_deictic = ["those", "these"]
+    print question
+    singular_deictic = ["it","it!","it?", "it,","it.", "that", "that!", "that?", "that.", "that,", "there", "there!", "there?", "there,", "there.", "this", "this!", "this?", "this.", "this,"]
+    plural_deictic = ["those", "these", "those?", "these?", "those,", "these,", "these.", "those.", "these!", "those!"]
     if type(question) is str:
         q = question.lower().translate(None, string.punctuation).split(' ')
     else:
@@ -14,7 +15,6 @@ def substitute(question, context):
 
     tagged_context = nltk.pos_tag(nltk.word_tokenize(context))
     replacements = []
-
     # find replacements
     for d in deictic:
         options = []

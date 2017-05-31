@@ -26,7 +26,7 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
         original_question = question
 
 	#First, contextualize the question if needed
-	print question
+        print question, curr_step
 	question =  substitute(question, curr_step)
         print question
 	real_question = ""
@@ -35,7 +35,6 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 			real_question += word + " "
 	question = real_question
         question = ''.join(question)
-        print question
 	#Now we check wiki-how csv to see if it exists already in the file
 	text_match_attempt = text_match_csv(file, question)
 	if text_match_attempt != -1:
