@@ -47,5 +47,5 @@ def is_deictic(question):
         return True
     else:
         return False
-
+print substitute("what is that?", "2. Protect the Eye")
 print substitute("what is that?", "protect the eye")
