@@ -38,6 +38,7 @@ def test(question, curr_step, file):
 	#return Answer as a dictionary
 	return answer
 
+print test("how do I treat a bullet wound")
 #Tests for direct questions in wikihow
 print test("Why isn't the child's throat checked for objects before compression is started?", "jib jab", "Data/wikihow.csv")
 print test("How do I help a person who is choking in his sleep?", "jib jab", "Data/wikihow.csv")
