@@ -8,7 +8,6 @@ def SearchYouTube(textToSearch):
 	html = response.read()
 	soup = BeautifulSoup(html)
 	links = soup.findAll(attrs={'class':'yt-uix-tile-link'})
-	return 'https://www.youtube.com' + links[0]['href'] + "/embed"
-
+	return 'https://www.youtube.com' + "/embed/"+ links[0]['href'][9:]
 #search_query = raw_input("What's Your Emergency: ")
 #webbrowser.open(SearchYouTube(search_query))
