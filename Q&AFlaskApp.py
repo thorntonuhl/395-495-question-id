@@ -50,9 +50,17 @@ def hello():
 
 	category = ""
 	#get category, keywords, and main phrase from the question
+	has_category = False
 	for cat in categories:
 		if cat in question.lower():
+			has_category = true
 			category = cat
+	if not has_category:
+		answer = {}
+		answer["text"] = "Sorry, I couldn't understand"
+		answer["type"] = ""
+		answer["mediaLink"] = ""
+		return json.dumps(answer, ensure_ascii=False)
 
 	keywords = set()
 	words = get_keywords(question)
