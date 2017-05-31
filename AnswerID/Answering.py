@@ -4,6 +4,7 @@ import webbrowser, json, pickle
 from pprint import pprint
 from text_matching import text_match_csv
 from context import substitute
+from context import is_deictic
 
 
 VIDEO_CATEGORIES = ["what if",
@@ -48,6 +49,8 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 	has_image = False
 	has_video = False
 	#Next, return video or image if applicable
+	if is_deictic(original_question):
+		main_phrase = question
 	if category in IMAGE_CATEGORIES or len(question.split()) == 1:
 		has_image = True
 		answer["type"] = "image"

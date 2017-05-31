@@ -39,6 +39,8 @@ def test(question, curr_step, file):
 	return answer
 
 #Tests for direct questions in wikihow
+print test("What do I do with it", "leg is bleeding", "Data/wikihow.csv")
+
 print test("Why isn't the child's throat checked for objects before compression is started?", "jib jab", "Data/wikihow.csv")
 print test("How do I help a person who is choking in his sleep?", "jib jab", "Data/wikihow.csv")
 
@@ -46,7 +48,6 @@ print test("How do I help a person who is choking in his sleep?", "jib jab", "Da
 print test("How do I give CPR?", "jib jab", "Data/wikihow.csv")
 print test("Regarding my child, who should I be asking to know how to effectively treat them", "child caring","Data/wikihow.csv" )
 
-print test("What do I do with it", "leg is bleeding", "Data/wikihow.csv")
 print test("How do I treat a broken leg", "what hurts", "Data/wikihow.csv")
 
 
@@ -56,3 +57,11 @@ print test("How do I perform CPR on an adult", "what hurts", "Data/wikihow.csv")
 #Nonsense
 print test("apple stuck walnut", "leg hurting", "Data/wikihow.csv")
 print test("What is the deal with airline food", "leg hurting", "Data/wikihow.csv")
+
+
+#what do I do when I cut my finger?
+#how do I apply a bandage?
+#apply a bandage?
+#What's the deal with airline food
+#how do I treat a bullet wound?
+#

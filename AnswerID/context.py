@@ -2,11 +2,11 @@ import nltk, string
 
 def substitute(question, context):
     # deictic = ["it", "that", "there", "those", "this", "these"]
-    singular_deictic = ["it", "that", "there", "this", "that?"]
-    plural_deictic = ["those", "these"]
+    singular_deictic = ["it", "it,", "it.", "it?", "it!", "that", "that.", "that,", "that!", "that?", "there", "there.", "there,", "there!", "there?", "this", "this.", "this,", "this?", "this!"]
+    plural_deictic = ["those", "those,", "those!", "those.","those?", "these", "these,", "these!", "these?", "these."]
     q = question.lower().encode('ascii','ignore').translate(None, string.punctuation).split(' ')
     deictic = (set(singular_deictic).union(set(plural_deictic))).intersection(set(q))
-    if not deictic:
+    if not is_deictic(question):
         return [question]
 
     tagged_context = nltk.pos_tag(nltk.word_tokenize(context))
@@ -37,3 +37,15 @@ def substitute(question, context):
         q[q.index(d)] = replacements[r]
         r += 1
     return q
+
+def is_deictic(question):
+    singular_deictic = ["it", "it,", "it.", "it?", "it!", "that", "that.", "that,", "that!", "that?", "there", "there.", "there,", "there!", "there?", "this", "this.", "this,", "this?", "this!"]
+    plural_deictic = ["those", "those,", "those!", "those.","those?", "these", "these,", "these!", "these?", "these."]
+    q = question.lower().encode('ascii','ignore').translate(None, string.punctuation).split(' ')
+    deictic = (set(singular_deictic).union(set(plural_deictic))).intersection(set(q))
+    if deictic:
+        return True
+    else:
+        return False
+
+print substitute("what is that?", "protect the eye")
