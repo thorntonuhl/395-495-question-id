@@ -11,14 +11,14 @@ def substitute(question, context):
 
     tagged_context = nltk.pos_tag(nltk.word_tokenize(context))
     replacements = []
-
+    print tagged_context
     # find replacements
     for d in deictic:
         options = []
 
         if d in singular_deictic:
             for c in tagged_context:
-                if c[1] == "NN":
+                if c[1] == "NN" or c[1] == "NNP":
                     options.append(c[0])
 
         elif d in plural_deictic:
@@ -32,6 +32,7 @@ def substitute(question, context):
         if not replacements:
             return [question]
     # replace deictic words
+    print replacements
     r = 0
     for d in deictic:
         q[q.index(d)] = replacements[r]
@@ -48,4 +49,3 @@ def is_deictic(question):
     else:
         return False
 print substitute("what is that?", "2. Protect the Eye")
-print substitute("what is that?", "protect the eye")
