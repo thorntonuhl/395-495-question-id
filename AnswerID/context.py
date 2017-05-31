@@ -4,7 +4,7 @@ def substitute(question, context):
     # deictic = ["it", "that", "there", "those", "this", "these"]
     singular_deictic = ["it", "that", "there", "this"]
     plural_deictic = ["those", "these"]
-    q = question.lower().translate(None, string.punctuation).split(' ')
+    q = question.lower().encode('ascii','ignore').translate(None, string.punctuation).split(' ')
     deictic = (set(singular_deictic).union(set(plural_deictic))).intersection(set(q))
     if not deictic:
         return [question]
