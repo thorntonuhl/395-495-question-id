@@ -27,13 +27,13 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 	#First, contextualize the question if needed
 	if type(question) is list:
 		question = " ".join(question)
-	print question
-        question =  substitute(question, curr_step)
-        print question
-        question = [val for sublist in question for val in sublist]	
-	print question
-        question = ''.join(question)
-        print question
+	question =  substitute(question, curr_step)
+	real_question = ""
+	for word in question:
+		if type(word) is str:
+			real_question += question
+	question = real_question
+    question = ''.join(question)
 	#Now we check wiki-how csv to see if it exists already in the file
 	text_match_attempt = text_match_csv(file, question)
 	if text_match_attempt != -1:
