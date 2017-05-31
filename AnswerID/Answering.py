@@ -33,10 +33,11 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 	real_question = ""
 	print question
         for word in question:
-		if type(word) is str or unicode:
-                        print word
-			real_question += str(word) + " "
-                        print real_question
+                if type(word) is list:
+                        for w in word:
+                            real_question += str(w) + " " 
+                else:
+                        real_question += str(word) + " "   
 	question = real_question
         question = ''.join(question)
 	#Now we check wiki-how csv to see if it exists already in the file
