@@ -34,7 +34,9 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 	print question
         for word in question:
 		if type(word) is str or unicode:
-			real_question += word + " "
+                        print word
+			real_question += str(word) + " "
+                        print real_question
 	question = real_question
         question = ''.join(question)
 	#Now we check wiki-how csv to see if it exists already in the file

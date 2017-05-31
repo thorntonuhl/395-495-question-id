@@ -53,7 +53,7 @@ def hello():
 	has_category = False
 	for cat in categories:
 		if cat in question.lower():
-			has_category = true
+			has_category = True
 			category = cat
 	if not has_category:
 		answer = {}
