@@ -23,6 +23,7 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 	answer = {}
 	#Gather text
 	answer_text = ""
+        original_question = question
 
 	#First, contextualize the question if needed
 	print question
@@ -65,7 +66,7 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 		answer["mediaLink"] = (SearchImage(' '.join(keywords)))
 
 	if answer_text == "":
-		answer_text = "Sorry, does this help?"
+		answer_text = "Does this help?"
 		
 	answer["text"] = answer_text
 	return json.dumps(answer, ensure_ascii=False)
