@@ -1,10 +1,25 @@
-import json
+import json, pickle
 from flask import Flask, request
 from AnswerID.Answering import Answer
 from Categorization.auto_add_categories import auto_category
 from Categorization.parser import get_keywords
 from Categorization.parser import get_phrase_after_category
 from flask_cors import CORS, cross_origin
+
+
+with open('Data_Collection/content.pickle', 'rb') as handle:
+    CONTENT = pickle.load(handle) 
+
+categories = ["who",
+    "what if",
+    "what do",
+    "what are",
+    "what does",
+    "when",
+    "where",
+    "how",
+    "should",
+    "can", "what is", "what are", "whats", "what's"]
 
 
 
@@ -34,16 +49,25 @@ def hello():
 	curr_step = data["step"]["text"]
 
 
+	category = ""
 	#get category, keywords, and main phrase from the question
-	category = auto_category(question)
-	keywords = get_keywords(question)
-	main_phrase = get_phrase_after_category(question, category).lstrip()
+	for cat in categories:
+		if cat in question.lower():
+			category = cat
 
+	keywords = set()
+	words = get_keywords(question)
+	for word in words:
+		keywords.add(word[0].lower())
+	keywords = frozenset(keywords)  
+	main_phrase = get_phrase_after_category(question, category).lstrip()
 	#Answer question
-	answer = Answer(question, category, keywords, main_phrase, curr_step)
+	answer = Answer(question, category, keywords, main_phrase, curr_step, "Data/wikihow.csv", CONTENT)
 
 	#return Answer as a dictionary
 	return answer
+
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port = 5000)
