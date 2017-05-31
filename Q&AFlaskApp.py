@@ -45,8 +45,12 @@ def hello():
 
 	#extract question and title of current step from payload
 	question = data["userText"]
-	curr_step = data["step"]["text"]
-
+        innerIndex = data["innerIndex"]
+        print question
+        try:
+	    curr_step = data["step"]["substeps"][innerIndex]["text"]
+        except:
+            curr_step = data["step"]["text"]
 
 	category = ""
 	#get category, keywords, and main phrase from the question
