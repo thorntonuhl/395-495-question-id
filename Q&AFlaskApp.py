@@ -47,7 +47,8 @@ def hello():
 	#extract question and title of current step from payload
 	question = data["userText"]
 	curr_step = data["step"]["text"]
-	print curr_step
+	curr_step = ' '.join(str(v) for v in curr_step)
+
 
 
 	category = ""
