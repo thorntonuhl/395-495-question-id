@@ -44,9 +44,8 @@ def hello():
 	data = request.get_json()
 
 	#extract question and title of current step from payload
-	question = str(data["userText"])
-	curr_step = str(data["step"]["text"])
-
+	question = data["userText"]
+	curr_step = data["step"]["text"]
 
 
 	category = ""

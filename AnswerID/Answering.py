@@ -28,11 +28,12 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 
 	#First, contextualize the question if needed
         print question, curr_step
-	question =  substitute(question, curr_step)
+	question = substitute(question, curr_step)
         print question
 	real_question = ""
-	for word in question:
-		if type(word) is str:
+	print question
+        for word in question:
+		if type(word) is str or unicode:
 			real_question += word + " "
 	question = real_question
         question = ''.join(question)
@@ -49,8 +50,10 @@ def Answer(question, category, keywords, main_phrase, curr_step, file, CONTENT):
 	has_image = False
 	has_video = False
 	#Next, return video or image if applicable
-	if is_deictic(original_question):
+	print curr_step, is_deictic(original_question)
+        if is_deictic(original_question):
 		main_phrase = question
+        print main_phrase, question
 	if category in IMAGE_CATEGORIES or len(question.split()) == 1:
 		has_image = True
 		answer["type"] = "image"

@@ -1,0 +1,23 @@
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+73.72.74.150 - - [31/May/2017 07:14:29] "POST / HTTP/1.1" 200 -
+73.72.74.150 - - [31/May/2017 07:25:40] "OPTIONS / HTTP/1.1" 200 -
+73.72.74.150 - - [31/May/2017 07:25:52] "POST / HTTP/1.1" 200 -
+73.72.74.150 - - [31/May/2017 07:26:10] "OPTIONS / HTTP/1.1" 200 -
+/usr/local/lib/python2.7/site-packages/beautifulsoup4-4.6.0-py2.7.egg/bs4/__init__.py:181: UserWarning: No parser was explicitly specified, so I'm using the best available HTML parser for this system ("html.parser"). This usually isn't a problem, but if you run this code on another system, or in a different virtual environment, it may use a different parser and behave differently.
+
+The code that caused this warning is on line 73 of the file Q&AFlaskApp.py. To get rid of this warning, change code that looks like this:
+
+ BeautifulSoup(YOUR_MARKUP})
+
+to this:
+
+ BeautifulSoup(YOUR_MARKUP, "html.parser")
+
+73.72.74.150 - - [31/May/2017 07:26:14] "POST / HTTP/1.1" 200 -
+73.72.74.150 - - [31/May/2017 07:30:31] "POST / HTTP/1.1" 200 -
+73.72.74.150 - - [31/May/2017 12:17:04] "POST / HTTP/1.1" 200 -
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+174.221.11.102 - - [31/May/2017 12:27:40] "POST / HTTP/1.1" 200 -
+144.121.160.87 - - [31/May/2017 14:34:41] "OPTIONS / HTTP/1.1" 200 -
+144.121.160.87 - - [31/May/2017 14:34:45] "POST / HTTP/1.1" 200 -
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
