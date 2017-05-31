@@ -42,12 +42,10 @@ def hello():
 	if request.method == 'GET':
 		return 'hello there'
 	data = request.get_json()
-	print data
 
 	#extract question and title of current step from payload
-	question = data["userText"]
-	curr_step = data["step"]["text"]
-	curr_step = ' '.join(str(v) for v in curr_step)
+	question = str(data["userText"])
+	curr_step = str(data["step"]["text"])
 
 
 
